@@ -37,3 +37,6 @@
 /* Keep the final N card in the final column on desktop; mobile uses normal flow. */
 @media screen and (min-width:901px){.group-standalone .card-grid{grid-column:2!important}.group-standalone .card{grid-column:5!important}}
 @media screen and (max-width:900px){.group-standalone .card-grid{grid-column:1!important}.group-standalone .card{grid-column:auto!important}}
+
+/* Print only: keep the row heading in its own track, and prevent the card grid from covering it. */
+@media print{.group{grid-template-columns:12mm minmax(0,1fr)!important;column-gap:3mm!important}.group-label{grid-column:1!important;min-width:0;position:relative;z-index:1}.group .card-grid{grid-column:2!important;min-width:0}.group-standalone .card-grid{grid-column:2!important}}
