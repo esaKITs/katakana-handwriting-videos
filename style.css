@@ -27,3 +27,6 @@
 .viewer{min-width:0;max-width:100%}
 .viewer>div:first-child{min-width:0;max-width:100%;overflow:hidden}
 @media(max-width:900px){.video-shell{min-height:0}}
+
+/* Match hiragana mobile layout: release desktop positions for Ya/Wa cards. */
+@media screen and (max-width:900px){.card-grid>.card{grid-column:auto!important}}
