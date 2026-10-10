@@ -1,0 +1,278 @@
+[
+  {
+    "kana": "ア",
+    "start": 33,
+    "end": 39,
+    "romaji": "a"
+  },
+  {
+    "kana": "イ",
+    "start": 65,
+    "end": 71,
+    "romaji": "i"
+  },
+  {
+    "kana": "ウ",
+    "start": 94,
+    "end": 107,
+    "romaji": "u"
+  },
+  {
+    "kana": "エ",
+    "start": 131,
+    "end": 142,
+    "romaji": "e"
+  },
+  {
+    "kana": "オ",
+    "start": 166,
+    "end": 178,
+    "romaji": "o"
+  },
+  {
+    "kana": "カ",
+    "start": 208,
+    "end": 221,
+    "romaji": "ka"
+  },
+  {
+    "kana": "キ",
+    "start": 248,
+    "end": 258,
+    "romaji": "ki"
+  },
+  {
+    "kana": "ク",
+    "start": 280,
+    "end": 290,
+    "romaji": "ku"
+  },
+  {
+    "kana": "ケ",
+    "start": 318,
+    "end": 327,
+    "romaji": "ke"
+  },
+  {
+    "kana": "コ",
+    "start": 347,
+    "end": 358,
+    "romaji": "ko"
+  },
+  {
+    "kana": "サ",
+    "start": 373,
+    "end": 385,
+    "romaji": "sa"
+  },
+  {
+    "kana": "シ",
+    "start": 413,
+    "end": 424,
+    "romaji": "shi"
+  },
+  {
+    "kana": "ス",
+    "start": 444,
+    "end": 453,
+    "romaji": "su"
+  },
+  {
+    "kana": "セ",
+    "start": 469,
+    "end": 480,
+    "romaji": "se"
+  },
+  {
+    "kana": "ソ",
+    "start": 512,
+    "end": 521,
+    "romaji": "so"
+  },
+  {
+    "kana": "タ",
+    "start": 550,
+    "end": 561,
+    "romaji": "ta"
+  },
+  {
+    "kana": "チ",
+    "start": 590,
+    "end": 599,
+    "romaji": "chi"
+  },
+  {
+    "kana": "ツ",
+    "start": 625,
+    "end": 635,
+    "romaji": "tsu"
+  },
+  {
+    "kana": "テ",
+    "start": 663,
+    "end": 675,
+    "romaji": "te"
+  },
+  {
+    "kana": "ト",
+    "start": 704,
+    "end": 711,
+    "romaji": "to"
+  },
+  {
+    "kana": "ナ",
+    "start": 738,
+    "end": 748,
+    "romaji": "na"
+  },
+  {
+    "kana": "ニ",
+    "start": 771,
+    "end": 776,
+    "romaji": "ni"
+  },
+  {
+    "kana": "ヌ",
+    "start": 798,
+    "end": 806,
+    "romaji": "nu"
+  },
+  {
+    "kana": "ネ",
+    "start": 834,
+    "end": 849,
+    "romaji": "ne"
+  },
+  {
+    "kana": "ノ",
+    "start": 875,
+    "end": 879,
+    "romaji": "no"
+  },
+  {
+    "kana": "ハ",
+    "start": 901,
+    "end": 907,
+    "romaji": "ha"
+  },
+  {
+    "kana": "ヒ",
+    "start": 925,
+    "end": 934,
+    "romaji": "hi"
+  },
+  {
+    "kana": "フ",
+    "start": 964,
+    "end": 971,
+    "romaji": "fu"
+  },
+  {
+    "kana": "ヘ",
+    "start": 985,
+    "end": 990,
+    "romaji": "he"
+  },
+  {
+    "kana": "ホ",
+    "start": 1014,
+    "end": 1029,
+    "romaji": "ho"
+  },
+  {
+    "kana": "マ",
+    "start": 1060,
+    "end": 1069,
+    "romaji": "ma"
+  },
+  {
+    "kana": "ミ",
+    "start": 1103,
+    "end": 1113,
+    "romaji": "mi"
+  },
+  {
+    "kana": "ム",
+    "start": 1139,
+    "end": 1150,
+    "romaji": "mu"
+  },
+  {
+    "kana": "メ",
+    "start": 1171,
+    "end": 1180,
+    "romaji": "me"
+  },
+  {
+    "kana": "モ",
+    "start": 1210,
+    "end": 1223,
+    "romaji": "mo"
+  },
+  {
+    "kana": "ヤ",
+    "start": 1255,
+    "end": 1264,
+    "romaji": "ya"
+  },
+  {
+    "kana": "ユ",
+    "start": 1282,
+    "end": 1289,
+    "romaji": "yu"
+  },
+  {
+    "kana": "ヨ",
+    "start": 1318,
+    "end": 1328,
+    "romaji": "yo"
+  },
+  {
+    "kana": "ラ",
+    "start": 1343,
+    "end": 1351,
+    "romaji": "ra"
+  },
+  {
+    "kana": "リ",
+    "start": 1373,
+    "end": 1381,
+    "romaji": "ri"
+  },
+  {
+    "kana": "ル",
+    "start": 1405,
+    "end": 1415,
+    "romaji": "ru"
+  },
+  {
+    "kana": "レ",
+    "start": 1439,
+    "end": 1445,
+    "romaji": "re"
+  },
+  {
+    "kana": "ロ",
+    "start": 1460,
+    "end": 1472,
+    "romaji": "ro"
+  },
+  {
+    "kana": "ワ",
+    "start": 1495,
+    "end": 1507,
+    "romaji": "wa"
+  },
+  {
+    "kana": "ヲ",
+    "start": 1525,
+    "end": 1534,
+    "romaji": "o"
+  },
+  {
+    "kana": "ン",
+    "start": 1552,
+    "end": 1561,
+    "romaji": "/N/"
+  }
+]
