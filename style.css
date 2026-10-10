@@ -52,3 +52,22 @@
 /* Match hiragana site row-heading typography, including print. */
 @media screen{.group-label .row-ja{font-family:"Klee One",cursive;font-size:.95rem;font-weight:600;font-synthesis:none}.group-label .row-en{font-family:"Noto Sans JP",sans-serif;font-size:.84rem;font-weight:600}}
 @media print{.group-label .row-ja{font-family:"Klee One",cursive;font-weight:600;font-synthesis:none}.group-label .row-en{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-weight:600}}
+
+/* Match hiragana mobile viewer: character and navigation on the left, QR on the right. */
+@media screen and (max-width:900px){
+.viewer-side{display:flex;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:12px}
+.selected-line{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;flex:1;min-width:0;gap:13px;flex-wrap:nowrap}
+.character-nav{display:flex;flex-direction:column;gap:8px;margin-top:0}
+.character-nav button{min-width:82px;min-height:44px}
+.selected-qr{display:flex;align-items:center;justify-content:center;flex:none;border-top:0;border-left:1px solid #e5ece4;padding:0 0 0 12px}
+.selected-qr img{width:75px;height:75px}
+}
+@media screen and (max-width:620px){
+.viewer-side{display:flex;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:nowrap;padding:14px 18px;gap:10px}
+.selected-line{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:13px;flex:1;min-width:0;flex-wrap:nowrap}
+.character-nav{display:flex;flex-direction:column;gap:8px;margin:0}
+.character-nav button{min-width:82px;min-height:44px}
+.selected-qr{display:flex;flex:none;grid-column:auto;justify-content:center;border-top:0;border-left:1px solid #e5ece4;padding:0 0 0 10px}
+.selected-qr img{width:65px;height:65px}
+}
+@media screen and (max-width:380px){.viewer-side{flex-wrap:wrap}.selected-qr{border-left:0;border-top:1px solid #e5ece4;padding:9px 0 0;width:100%;justify-content:flex-start}}
