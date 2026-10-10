@@ -30,3 +30,10 @@
 
 /* Match hiragana mobile layout: release desktop positions for Ya/Wa cards. */
 @media screen and (max-width:900px){.card-grid>.card{grid-column:auto!important}}
+
+/* Stack each character's romanization immediately beneath its katakana. */
+.character-label{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card-romaji{display:block;margin-top:4px;text-align:center}
+/* Keep the final N card in the final column on desktop; mobile uses normal flow. */
+@media screen and (min-width:901px){.group-standalone .card-grid{grid-column:2!important}.group-standalone .card{grid-column:5!important}}
+@media screen and (max-width:900px){.group-standalone .card-grid{grid-column:1!important}.group-standalone .card{grid-column:auto!important}}
