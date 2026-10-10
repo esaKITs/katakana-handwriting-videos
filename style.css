@@ -27,3 +27,7 @@
 .viewer{min-width:0;max-width:100%}
 .viewer>div:first-child{min-width:0;max-width:100%;overflow:hidden}
 @media(max-width:900px){.video-shell{min-height:0}}
+
+/* Trial: mask side labels without resizing or cropping the handwriting video. */
+.video-shell::before,.video-shell::after{content:"";position:absolute;top:0;bottom:0;width:13%;background:#26382b;z-index:2;pointer-events:none}
+.video-shell::before{left:0}.video-shell::after{right:0}
