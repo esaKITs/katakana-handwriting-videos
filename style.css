@@ -18,3 +18,12 @@
   .controls #status{font-size:.72rem}
   .character-nav button{min-width:44px}
 }
+
+/* Keep the entire 16:9 YouTube frame visible, especially on iPhone Safari.
+   YouTube's player inserts an iframe with intrinsic dimensions; constrain it
+   to the actual responsive player box rather than cropping the right edge. */
+.video-shell{position:relative;width:100%;max-width:100%;height:auto;aspect-ratio:16 / 9;min-width:0;min-height:0;overflow:hidden}
+.video-shell iframe,.video-shell>iframe{position:absolute!important;inset:0!important;display:block!important;width:100%!important;max-width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;border:0}
+.viewer{min-width:0;max-width:100%}
+.viewer>div:first-child{min-width:0;max-width:100%;overflow:hidden}
+@media(max-width:900px){.video-shell{min-height:0}}
