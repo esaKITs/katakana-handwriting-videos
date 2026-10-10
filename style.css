@@ -48,3 +48,7 @@
 .controls .icon-control,.controls button:first-child.icon-control{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;padding:0;border-radius:10px;flex-shrink:0}
 .controls .icon-control svg{display:block;width:25px;height:25px}
 @media(max-width:620px){.controls .icon-control,.controls button:first-child.icon-control,.controls .print-button.icon-control{width:46px;height:46px;min-width:46px;min-height:46px;padding:0}}
+
+/* Match hiragana site row-heading typography, including print. */
+@media screen{.group-label .row-ja{font-family:"Klee One",cursive;font-size:.95rem;font-weight:600;font-synthesis:none}.group-label .row-en{font-family:"Noto Sans JP",sans-serif;font-size:.84rem;font-weight:600}}
+@media print{.group-label .row-ja{font-family:"Klee One",cursive;font-weight:600;font-synthesis:none}.group-label .row-en{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;font-weight:600}}
