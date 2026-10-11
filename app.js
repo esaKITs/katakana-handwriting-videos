@@ -3,11 +3,6 @@ let videos=[],selected=0,player,ready=false,loop=false,monitorId=null;
 let playbackMode=new URLSearchParams(location.search).get('mode')==='explanation'?'explanation':'writing';
 const $=id=>document.getElementById(id),setStatus=s=>{};
 
-function updateMuteButton(){
-  const muted=!ready||player.isMuted(),b=$('mute'),label=muted?'消音解除':'消音';
-  b.setAttribute('aria-label',label);b.title=label;
-  b.innerHTML=muted?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zM16 9l5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zM15 9a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-}
 function qrUrl(k){return 'qr/'+k.codePointAt(0).toString(16).padStart(4,'0')+'.svg'}
 function updateQR(k){$('selected-qr').src=qrUrl(k);$('selected-qr').alt=k+'の教材ページへのQRコード'}
 function segmentStart(){return Math.max(0,videos[selected].start-2)}
@@ -23,6 +18,10 @@ function syncTipsToggle(){
   if(!t)return;
   t.checked=playbackMode==='explanation';
 }
+function applyAudioMode(){
+  if(!ready)return;
+  try{if(playbackMode==='explanation')player.unMute();else player.mute()}catch(e){}
+}
 function setPlaybackMode(mode){
   if(mode!=='writing'&&mode!=='explanation')return;
   stop();playbackMode=mode;syncTipsToggle();
@@ -31,7 +30,7 @@ function setPlaybackMode(mode){
   history.replaceState(null,'',u);
   if(ready&&videos.length){
     try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
-    try{if(mode==='explanation')player.unMute();else player.mute();updateMuteButton()}catch(e){}
+    applyAudioMode();
   }
 }
 function stop(){loop=false;if(ready)try{player.pauseVideo()}catch(e){}}
@@ -45,16 +44,15 @@ function play(){
   loop=true;
   try{
     loadCurrentSegment();
-    if(playbackMode==='explanation')player.unMute();else player.mute();
-    updateMuteButton();setStatus('区間ループ再生中');
+    applyAudioMode();
+    setStatus('区間ループ再生中');
   }catch(e){loop=false;setStatus('再生できませんでした')}
 }
 function loopBack(){
   if(!loop||!ready)return;
   try{
     loadCurrentSegment();
-    if(playbackMode==='explanation')player.unMute();else player.mute();
-    updateMuteButton();
+    applyAudioMode();
   }catch(e){loop=false;setStatus('繰り返し再生に失敗しました')}
 }
 function choose(i,changeUrl=true,userAction=false){
@@ -85,16 +83,15 @@ function render(){
 }
 window.onYouTubeIframeAPIReady=()=>{
   player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:0,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'ja'},events:{
-    onReady:()=>{ready=true;try{if(playbackMode==='explanation')player.unMute();else player.mute();player.setOption('captions','track',{});player.setOption('captions','reload',false)}catch(e){}updateMuteButton();setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!loop||!ready)return;try{if(player.getCurrentTime()>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
+    onReady:()=>{ready=true;applyAudioMode();try{player.setOption('captions','track',{});player.setOption('captions','reload',false)}catch(e){}setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!loop||!ready)return;try{if(player.getCurrentTime()>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
     onStateChange:e=>{if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;setStatus('YouTube再生エラー: '+e.data)}
   }})
 };
 $('play').onclick=play;
-$('mute').onclick=()=>{if(!ready)return;if(player.isMuted()){player.unMute();updateMuteButton()}else{player.mute();updateMuteButton()}};
 $('tips-toggle').onchange=e=>setPlaybackMode(e.target.checked?'explanation':'writing');
 $('previous-kana').onclick=()=>{if(selected>0)choose(selected-1,true,true)};
 $('next-kana').onclick=()=>{if(selected<videos.length-1)choose(selected+1,true,true)};
 $('print-button').onclick=async()=>{const button=$('print-button');button.disabled=true;try{const images=[...document.querySelectorAll('.card-qr')];await Promise.all(images.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth===0){reject(new Error('QR missing: '+img.src));return}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',()=>reject(new Error('QR missing: '+img.src)),{once:true})})));window.print()}catch(e){alert('QRコードをすべて読み込めませんでした。通信状況を確認して、もう一度お試しください。')}finally{button.disabled=false}};
-window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);playbackMode=q.get('mode')==='explanation'?'explanation':'writing';syncTipsToggle();const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
+window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);playbackMode=q.get('mode')==='explanation'?'explanation':'writing';syncTipsToggle();applyAudioMode();const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
 fetch('videos.json').then(r=>r.json()).then(d=>{videos=d;render()}).catch(()=>setStatus('一覧データを読み込めません'));
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.append(script);
