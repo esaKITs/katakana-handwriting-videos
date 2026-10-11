@@ -71,3 +71,8 @@
 .selected-qr img{width:65px;height:65px}
 }
 @media screen and (max-width:380px){.viewer-side{flex-wrap:wrap}.selected-qr{border-left:0;border-top:1px solid #e5ece4;padding:9px 0 0;width:100%;justify-content:flex-start}}
+
+/* The permanent wrapper owns layout; YouTube only replaces the inner mount. */
+.video-shell{position:relative;aspect-ratio:16/9;height:auto;min-height:0;overflow:hidden}
+.video-shell #video-shell{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;display:block}
+.video-shell iframe#video-shell{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
