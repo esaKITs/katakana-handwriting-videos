@@ -33,7 +33,12 @@ function updateTipCaption(time){
   if(!box)return;
   if(playbackMode!=='explanation'||!videos.length){hideTipCaption();return}
   const list=tipMap.get(videos[selected].kana)||[];
-  const tip=list.find(x=>time>=x.start&&time<=x.end);
+  // Keep the previous tip visible until the next tip begins.
+  // Hide it only outside the explanation timeline.
+  const first=list[0],last=list[list.length-1];
+  const active=first&&last&&time>=first.start&&time<=segmentEnd();
+  let tip=null;
+  if(active){for(const item of list){if(time>=item.start)tip=item;else break}}
   const text=tip?tip.en:'';
   if(text===currentTipText)return;
   currentTipText=text;
