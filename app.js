@@ -134,8 +134,9 @@ function render(){
   const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
 }
 window.onYouTubeIframeAPIReady=()=>{
-  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,cc_lang_pref:'en',iv_load_policy:3,hl:'ja'},events:{
+  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
     onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
+    onApiChange:()=>{try{player.setOption('captions','track',{})}catch(e){}},
     onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING)suppressYouTubeCaptions();if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
   }})
 };
