@@ -34,6 +34,11 @@ function syncTipsToggle(){
   if(!t)return;
   t.checked=playbackMode==='explanation';
 }
+function suppressYouTubeCaptions(){
+  if(!ready)return;
+  try{player.setOption('captions','track',{});}catch(e){}
+  try{player.unloadModule('captions');}catch(e){}
+}
 function applyAudioMode(){
   if(!ready)return;
   try{if(playbackMode==='explanation')player.unMute();else player.mute()}catch(e){}
@@ -81,6 +86,7 @@ function stop(){loop=false;hideTipCaption();if(ready)try{player.pauseVideo()}cat
 function loadCurrentSegment(){
   if(!ready||!videos.length)return;
   player.loadVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()});
+  suppressYouTubeCaptions();
 }
 function play(){
   if(!ready)return;
@@ -128,9 +134,9 @@ function render(){
   const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
 }
 window.onYouTubeIframeAPIReady=()=>{
-  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'ja'},events:{
-    onReady:()=>{ready=true;applyAudioMode();try{player.setOption('captions','track',{});player.setOption('captions','reload',false)}catch(e){}setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
-    onStateChange:e=>{if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
+  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,cc_lang_pref:'en',iv_load_policy:3,hl:'ja'},events:{
+    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
+    onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING)suppressYouTubeCaptions();if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
   }})
 };
 $('play').onclick=play;
