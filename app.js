@@ -9,6 +9,7 @@ function segmentStart(){return Math.max(0,videos[selected].start-2)}
 function segmentEnd(){
   const v=videos[selected];
   if(playbackMode==='writing')return v.end+2;
+  if(Number.isFinite(v.tipsEnd))return v.tipsEnd;
   if(selected<videos.length-1)return Math.max(v.end+2,videos[selected+1].start-2);
   if(ready){const d=player.getDuration();if(d&&d>v.end)return d-.25}
   return v.end+30;
