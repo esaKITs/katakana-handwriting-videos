@@ -33,6 +33,7 @@ function syncTipsToggle(){
   const t=$('tips-toggle');
   if(!t)return;
   t.checked=playbackMode==='explanation';
+  document.body.classList.toggle('tips-enabled',playbackMode==='explanation');
 }
 function suppressYouTubeCaptions(){
   if(!ready)return;
