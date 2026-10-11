@@ -33,7 +33,9 @@ function updateTipCaption(time){
   if(!box)return;
   if(playbackMode!=='explanation'||!videos.length){hideTipCaption();return}
   const list=subtitleMap.get(videos[selected].kana)||[];
-  const active=time>=segmentStart()&&time<segmentEnd();
+  // ソ has no spoken red-pen explanation; clear the writing subtitle at 524s.
+  const silentTips=videos[selected].kana==='ソ'&&time>=524;
+  const active=time>=segmentStart()&&time<segmentEnd()&&!silentTips;
   let entry=null;
   if(active){for(const item of list){if(time>=item.start)entry=item;else break}}
   const key=entry?entry.start+'|'+entry.en+'|'+(entry.strokeLabel||''):'';
