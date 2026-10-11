@@ -78,10 +78,7 @@ function setPlaybackMode(mode){
   const u=new URL(location.href);
   if(mode==='explanation')u.searchParams.set('mode','explanation');else u.searchParams.delete('mode');
   history.replaceState(null,'',u);
-  if(ready&&videos.length){
-    try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
-    applyAudioMode();
-  }
+  if(player&&window.YT){createVideoPlayer();}
 }
 function stop(){loop=false;hideTipCaption();if(ready)try{player.pauseVideo()}catch(e){}}
 function loadCurrentSegment(){
@@ -134,13 +131,19 @@ function render(){
   });
   const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
 }
-window.onYouTubeIframeAPIReady=()=>{
-  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
-    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
+function createVideoPlayer(){
+  ready=false;
+  if(player){try{player.destroy()}catch(e){};player=null;}
+  // YouTube replaces this element with an iframe, so restore its mount point.
+  const mount=document.getElementById('video-shell');
+  if(!mount){const shell=document.createElement('div');shell.id='video-shell';document.querySelector('.video-shell')?.replaceWith(shell);}
+  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:playbackMode==='writing'?0:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
+    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
     onApiChange:()=>{try{player.setOption('captions','track',{})}catch(e){}},
     onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING)suppressYouTubeCaptions();if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
-  }})
-};
+  }});
+}
+window.onYouTubeIframeAPIReady=createVideoPlayer;
 $('play').onclick=play;
 $('tips-toggle').onchange=e=>setPlaybackMode(e.target.checked?'explanation':'writing');
 $('previous-kana').onclick=()=>{if(selected>0)choose(selected-1,true,true)};
