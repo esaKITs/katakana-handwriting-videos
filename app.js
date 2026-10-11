@@ -5,11 +5,26 @@ const $=id=>document.getElementById(id),setStatus=s=>{};
 
 function qrUrl(k){return 'qr/'+k.codePointAt(0).toString(16).padStart(4,'0')+'.svg'}
 function updateQR(k){$('selected-qr').src=qrUrl(k);$('selected-qr').alt=k+'の教材ページへのQRコード'}
-function segmentStart(){return Math.max(0,videos[selected].start-2)}
+function segmentStart(){
+  const v=videos[selected];
+  const normal=Math.max(0,v.start-2);
+  if(playbackMode!=='explanation')return normal;
+  const first=subtitleMap.get(v.kana)?.[0]?.start;
+  if(!Number.isFinite(first))return normal;
+  const previousEnd=selected>0?videos[selected-1].tipsEnd:0;
+  // Keep spoken introductions, but never seek into the previous character's segment.
+  return Math.max(0,previousEnd,Math.min(normal,first));
+}
 function segmentEnd(){
   const v=videos[selected];
   if(playbackMode==='writing')return v.end+2;
-  if(Number.isFinite(v.tipsEnd))return v.tipsEnd;
+  if(Number.isFinite(v.tipsEnd)){
+    const cues=subtitleMap.get(v.kana)||[];
+    const lastEnd=cues.length?cues[cues.length-1].end:0;
+    const nextStart=selected<videos.length-1?videos[selected+1].start:Infinity;
+    // Subtitle-based provisional tail allowance; cap before the next character.
+    return Math.max(v.tipsEnd,Math.min(lastEnd+0.5,nextStart-1));
+  }
   if(selected<videos.length-1)return Math.max(v.end+2,videos[selected+1].start-2);
   if(ready){const d=player.getDuration();if(d&&d>v.end)return d-.25}
   return v.end+30;
