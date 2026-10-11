@@ -3,276 +3,322 @@
     "kana": "ア",
     "start": 33,
     "end": 39,
+    "tipsEnd": 59,
     "romaji": "a"
   },
   {
     "kana": "イ",
     "start": 65,
     "end": 71,
+    "tipsEnd": 85,
     "romaji": "i"
   },
   {
     "kana": "ウ",
     "start": 94,
     "end": 107,
+    "tipsEnd": 124,
     "romaji": "u"
   },
   {
     "kana": "エ",
     "start": 131,
     "end": 142,
+    "tipsEnd": 157.5,
     "romaji": "e"
   },
   {
     "kana": "オ",
     "start": 166,
     "end": 178,
+    "tipsEnd": 197.5,
     "romaji": "o"
   },
   {
     "kana": "カ",
     "start": 208,
     "end": 221,
+    "tipsEnd": 239,
     "romaji": "ka"
   },
   {
     "kana": "キ",
     "start": 248,
     "end": 258,
+    "tipsEnd": 272,
     "romaji": "ki"
   },
   {
     "kana": "ク",
     "start": 280,
     "end": 290,
+    "tipsEnd": 309.5,
     "romaji": "ku"
   },
   {
     "kana": "ケ",
     "start": 318,
     "end": 327,
+    "tipsEnd": 341.5,
     "romaji": "ke"
   },
   {
     "kana": "コ",
     "start": 347,
     "end": 358,
+    "tipsEnd": 367,
     "romaji": "ko"
   },
   {
     "kana": "サ",
     "start": 373,
     "end": 385,
+    "tipsEnd": 407.5,
     "romaji": "sa"
   },
   {
     "kana": "シ",
     "start": 413,
     "end": 424,
+    "tipsEnd": 439.5,
     "romaji": "shi"
   },
   {
     "kana": "ス",
     "start": 444,
     "end": 453,
+    "tipsEnd": 462.5,
     "romaji": "su"
   },
   {
     "kana": "セ",
     "start": 469,
     "end": 480,
+    "tipsEnd": 503,
     "romaji": "se"
   },
   {
     "kana": "ソ",
     "start": 512,
     "end": 521,
+    "tipsEnd": 537.5,
     "romaji": "so"
   },
   {
     "kana": "タ",
     "start": 550,
     "end": 561,
+    "tipsEnd": 582.5,
     "romaji": "ta"
   },
   {
     "kana": "チ",
     "start": 590,
     "end": 599,
+    "tipsEnd": 619,
     "romaji": "chi"
   },
   {
     "kana": "ツ",
     "start": 625,
     "end": 635,
+    "tipsEnd": 653.5,
     "romaji": "tsu"
   },
   {
     "kana": "テ",
     "start": 663,
     "end": 675,
+    "tipsEnd": 696,
     "romaji": "te"
   },
   {
     "kana": "ト",
     "start": 704,
     "end": 711,
+    "tipsEnd": 728.5,
     "romaji": "to"
   },
   {
     "kana": "ナ",
     "start": 738,
     "end": 748,
+    "tipsEnd": 767,
     "romaji": "na"
   },
   {
     "kana": "ニ",
     "start": 771,
     "end": 776,
+    "tipsEnd": 790.5,
     "romaji": "ni"
   },
   {
     "kana": "ヌ",
     "start": 798,
     "end": 806,
+    "tipsEnd": 826,
     "romaji": "nu"
   },
   {
     "kana": "ネ",
     "start": 834,
     "end": 849,
+    "tipsEnd": 868.5,
     "romaji": "ne"
   },
   {
     "kana": "ノ",
     "start": 875,
     "end": 879,
+    "tipsEnd": 892.5,
     "romaji": "no"
   },
   {
     "kana": "ハ",
     "start": 901,
     "end": 907,
+    "tipsEnd": 918.5,
     "romaji": "ha"
   },
   {
     "kana": "ヒ",
     "start": 925,
     "end": 934,
+    "tipsEnd": 953,
     "romaji": "hi"
   },
   {
     "kana": "フ",
     "start": 964,
     "end": 971,
+    "tipsEnd": 978.5,
     "romaji": "fu"
   },
   {
     "kana": "ヘ",
     "start": 985,
     "end": 990,
+    "tipsEnd": 1005.5,
     "romaji": "he"
   },
   {
     "kana": "ホ",
     "start": 1014,
     "end": 1029,
+    "tipsEnd": 1048.5,
     "romaji": "ho"
   },
   {
     "kana": "マ",
     "start": 1060,
     "end": 1069,
+    "tipsEnd": 1091.5,
     "romaji": "ma"
   },
   {
     "kana": "ミ",
     "start": 1103,
     "end": 1113,
+    "tipsEnd": 1130.5,
     "romaji": "mi"
   },
   {
     "kana": "ム",
     "start": 1139,
     "end": 1150,
+    "tipsEnd": 1163,
     "romaji": "mu"
   },
   {
     "kana": "メ",
     "start": 1171,
     "end": 1180,
+    "tipsEnd": 1199.5,
     "romaji": "me"
   },
   {
     "kana": "モ",
     "start": 1210,
     "end": 1223,
+    "tipsEnd": 1246.5,
     "romaji": "mo"
   },
   {
     "kana": "ヤ",
     "start": 1255,
     "end": 1264,
+    "tipsEnd": 1276,
     "romaji": "ya"
   },
   {
     "kana": "ユ",
     "start": 1282,
     "end": 1289,
+    "tipsEnd": 1303,
     "romaji": "yu"
   },
   {
     "kana": "ヨ",
     "start": 1318,
     "end": 1328,
+    "tipsEnd": 1338.5,
     "romaji": "yo"
   },
   {
     "kana": "ラ",
     "start": 1343,
     "end": 1351,
+    "tipsEnd": 1363.5,
     "romaji": "ra"
   },
   {
     "kana": "リ",
     "start": 1373,
     "end": 1381,
+    "tipsEnd": 1400,
     "romaji": "ri"
   },
   {
     "kana": "ル",
     "start": 1405,
     "end": 1415,
+    "tipsEnd": 1433,
     "romaji": "ru"
   },
   {
     "kana": "レ",
     "start": 1439,
     "end": 1445,
+    "tipsEnd": 1454,
     "romaji": "re"
   },
   {
     "kana": "ロ",
     "start": 1460,
     "end": 1472,
+    "tipsEnd": 1485,
     "romaji": "ro"
   },
   {
     "kana": "ワ",
     "start": 1495,
     "end": 1507,
+    "tipsEnd": 1515.5,
     "romaji": "wa"
   },
   {
     "kana": "ヲ",
     "start": 1525,
     "end": 1534,
+    "tipsEnd": 1545.5,
     "romaji": "o"
   },
   {
     "kana": "ン",
     "start": 1552,
     "end": 1561,
+    "tipsEnd": 1576,
     "romaji": "/N/"
   }
 ]
