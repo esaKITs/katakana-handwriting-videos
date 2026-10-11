@@ -30,28 +30,39 @@ function setPlaybackMode(mode){
   if(mode==='explanation')u.searchParams.set('mode','explanation');else u.searchParams.delete('mode');
   history.replaceState(null,'',u);
   if(ready&&videos.length){
-    try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart()})}catch(e){}
+    try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
     try{if(mode==='explanation')player.unMute();else player.mute();updateMuteButton()}catch(e){}
   }
 }
 function stop(){loop=false;if(ready)try{player.pauseVideo()}catch(e){}}
+function loadCurrentSegment(){
+  if(!ready||!videos.length)return;
+  player.loadVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()});
+}
 function play(){
   if(!ready)return;
   try{const iframe=player.getIframe(),request=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(request){const result=request.call(iframe);if(result&&typeof result.catch==='function')result.catch(()=>{});}else if(iframe.webkitEnterFullscreen){iframe.webkitEnterFullscreen()}}catch(e){}
   loop=true;
   try{
-    player.loadVideoById({videoId:VIDEO,startSeconds:segmentStart()});
+    loadCurrentSegment();
     if(playbackMode==='explanation')player.unMute();else player.mute();
     updateMuteButton();setStatus('区間ループ再生中');
-  }catch(e){setStatus('再生できませんでした')}
+  }catch(e){loop=false;setStatus('再生できませんでした')}
 }
-function loopBack(){if(!loop||!ready)return;try{player.seekTo(segmentStart(),true);player.playVideo()}catch(e){setStatus('繰り返し再生に失敗しました')}}
+function loopBack(){
+  if(!loop||!ready)return;
+  try{
+    loadCurrentSegment();
+    if(playbackMode==='explanation')player.unMute();else player.mute();
+    updateMuteButton();
+  }catch(e){loop=false;setStatus('繰り返し再生に失敗しました')}
+}
 function choose(i,changeUrl=true,userAction=false){
   stop();selected=i;const v=videos[i];
   $('selected-kana').textContent=v.kana;$('selected-romaji').textContent=v.romaji;updateQR(v.kana);
   $('previous-kana').disabled=i===0;$('next-kana').disabled=i===videos.length-1;
   document.querySelectorAll('.card').forEach((c,j)=>{c.classList.toggle('active',i===j);c.querySelector('button').setAttribute('aria-pressed',String(i===j))});
-  if(ready&&!userAction)try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart()})}catch(e){}
+  if(ready&&!userAction)try{player.cueVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
   if(changeUrl){const u=new URL(location.href);u.searchParams.set('kana',v.kana);history.replaceState(null,'',u);$('video-shell').scrollIntoView({block:'start'})}
   setStatus('再生ボタンで開始');if(userAction)play();
 }
