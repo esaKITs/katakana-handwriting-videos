@@ -1,5 +1,5 @@
 const VIDEO='Rn2W95wAbvI',rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
-let videos=[],tipMap=new Map(),selected=0,player,ready=false,loop=false,monitorId=null,currentTipText='';
+let videos=[],tipMap=new Map(),subtitleMap=new Map(),selected=0,player,ready=false,loop=false,monitorId=null,currentTipText='';
 let playbackMode=new URLSearchParams(location.search).get('mode')==='explanation'?'explanation':'writing';
 const $=id=>document.getElementById(id),setStatus=s=>{};
 
@@ -32,17 +32,22 @@ function updateTipCaption(time){
   const box=$('tip-caption');
   if(!box)return;
   if(playbackMode!=='explanation'||!videos.length){hideTipCaption();return}
-  const list=tipMap.get(videos[selected].kana)||[];
-  // Keep the previous tip visible until the next tip begins.
-  // Hide it only outside the explanation timeline.
-  const first=list[0],last=list[list.length-1];
-  const active=first&&last&&time>=first.start&&time<=segmentEnd();
-  let tip=null;
-  if(active){for(const item of list){if(time>=item.start)tip=item;else break}}
-  const text=tip?tip.en:'';
-  if(text===currentTipText)return;
-  currentTipText=text;
-  if(text){box.textContent=text;box.hidden=false}else{box.textContent='';box.hidden=true}
+  const list=subtitleMap.get(videos[selected].kana)||[];
+  const active=time>=segmentStart()&&time<segmentEnd();
+  let entry=null;
+  if(active){for(const item of list){if(time>=item.start)entry=item;else break}}
+  const key=entry?entry.start+'|'+entry.en+'|'+(entry.strokeLabel||''):'';
+  if(key===currentTipText)return;
+  currentTipText=key;
+  box.replaceChildren();
+  if(!entry){box.hidden=true;return}
+  if(entry.strokeLabel){
+    const strong=document.createElement('strong');
+    strong.textContent=entry.strokeLabel+': ';
+    box.append(strong);
+  }
+  box.append(document.createTextNode(entry.en));
+  box.hidden=false;
 }
 function setPlaybackMode(mode){
   if(mode!=='writing'&&mode!=='explanation')return;
@@ -62,7 +67,7 @@ function loadCurrentSegment(){
 }
 function play(){
   if(!ready)return;
-  try{const iframe=player.getIframe(),request=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(request){const result=request.call(iframe);if(result&&typeof result.catch==='function')result.catch(()=>{});}else if(iframe.webkitEnterFullscreen){iframe.webkitEnterFullscreen()}}catch(e){}
+  if(playbackMode==='writing'){try{const iframe=player.getIframe(),request=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(request){const result=request.call(iframe);if(result&&typeof result.catch==='function')result.catch(()=>{});}else if(iframe.webkitEnterFullscreen){iframe.webkitEnterFullscreen()}}catch(e){}}
   loop=true;
   try{
     loadCurrentSegment();
@@ -106,7 +111,7 @@ function render(){
   const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
 }
 window.onYouTubeIframeAPIReady=()=>{
-  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:0,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'ja'},events:{
+  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'ja'},events:{
     onReady:()=>{ready=true;applyAudioMode();try{player.setOption('captions','track',{});player.setOption('captions','reload',false)}catch(e){}setStatus('再生できます');if(videos.length)choose(selected,false);monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(loop&&t>=segmentEnd()-.12)loopBack()}catch(e){}},150)},
     onStateChange:e=>{if(e.data===YT.PlayerState.ENDED&&loop)loopBack()},onError:e=>{loop=false;hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
   }})
@@ -117,5 +122,5 @@ $('previous-kana').onclick=()=>{if(selected>0)choose(selected-1,true,true)};
 $('next-kana').onclick=()=>{if(selected<videos.length-1)choose(selected+1,true,true)};
 $('print-button').onclick=async()=>{const button=$('print-button');button.disabled=true;try{const images=[...document.querySelectorAll('.card-qr')];await Promise.all(images.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth===0){reject(new Error('QR missing: '+img.src));return}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',()=>reject(new Error('QR missing: '+img.src)),{once:true})})));window.print()}catch(e){alert('QRコードをすべて読み込めませんでした。通信状況を確認して、もう一度お試しください。')}finally{button.disabled=false}};
 window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);playbackMode=q.get('mode')==='explanation'?'explanation':'writing';syncTipsToggle();applyAudioMode();hideTipCaption();const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
-Promise.all([fetch('videos.json').then(r=>r.json()),fetch('tips.json').then(r=>r.json())]).then(([v,t])=>{videos=v;tipMap=new Map(t.map(x=>[x.kana,x.tips||[]]));render()}).catch(()=>setStatus('一覧データを読み込めません'));
+Promise.all([fetch('videos.json').then(r=>r.json()),fetch('tips.json').then(r=>r.json()),fetch('subtitles.json').then(r=>r.json())]).then(([v,t,sub])=>{videos=v;tipMap=new Map(t.map(x=>[x.kana,x.tips||[]]));subtitleMap=new Map(Object.entries(sub));render()}).catch(()=>setStatus('一覧データを読み込めません'));
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.append(script);
