@@ -116,7 +116,12 @@ function play(){
 }
 function loopBack(){
  if(!loop||!ready||!isPlaying)return;
- try{loadCurrentSegment();applyAudioMode();hideTipCaption()}
+ try{
+   // Reuse the current YouTube player instead of reloading the video at every loop.
+   player.seekTo(segmentStart(),true);
+   player.playVideo();
+   applyAudioMode();hideTipCaption();
+ }
  catch(e){isPlaying=false;updatePlayButton();setStatus('繰り返し再生に失敗しました')}
 }
 function endSegment(){
