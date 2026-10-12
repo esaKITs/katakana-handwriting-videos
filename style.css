@@ -124,3 +124,8 @@
 .loop-help-popup p{margin:7px 0}
 .loop-help-popup p[lang=en]{color:#526575}
 @media(max-width:620px){.controls{gap:6px}.loop-help-button{width:25px;font-size:21px}.tips-option{margin-left:0}}
+
+/* Keep the header kana emblem perfectly square and optically centered. */
+@media screen {
+.site-header .brand-mark{box-sizing:border-box;flex:0 0 49px;width:49px;height:49px;min-width:49px;min-height:49px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;line-height:1;text-align:center;padding:0 0 2px}
+}
