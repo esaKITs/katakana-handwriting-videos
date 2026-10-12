@@ -1,3 +1,11 @@
+
+/* Loop help is informational only; playback and subtitle logic are unchanged. */
+const loopHelpButton=document.getElementById('loop-help');
+const loopHelpPopup=document.getElementById('loop-help-popup');
+function setLoopHelpOpen(open){loopHelpPopup.hidden=!open;loopHelpButton.setAttribute('aria-expanded',String(open))}
+loopHelpButton.addEventListener('click',()=>setLoopHelpOpen(loopHelpPopup.hidden));
+document.addEventListener('pointerdown',event=>{if(!event.target.closest('.loop-help-wrap'))setLoopHelpOpen(false)});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!loopHelpPopup.hidden){setLoopHelpOpen(false);loopHelpButton.focus()}});
 const VIDEO='Rn2W95wAbvI',rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
 let videos=[],tipMap=new Map(),subtitleMap=new Map(),selected=0,player,ready=false,loop=true,isPlaying=false,monitorId=null,currentTipText='';
 let playbackMode=new URLSearchParams(location.search).get('mode')==='explanation'?'explanation':'writing';
