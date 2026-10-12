@@ -144,11 +144,11 @@ function render(){
   const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
 }
 function createVideoPlayer(){
-  ready=false;
+  ready=false;isPlaying=false;updatePlayButton();
   if(player){try{player.destroy()}catch(e){};player=null;}
   // YouTube replaces this element with an iframe, so restore its mount point.
   const mount=document.getElementById('video-shell');
-  if(!mount){const shell=document.createElement('div');shell.id='video-shell';document.querySelector('.video-shell')?.replaceWith(shell);}
+  if(!mount){const shell=document.createElement('div');shell.id='video-shell';document.querySelector('.video-shell')?.append(shell);}
   player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:playbackMode==='writing'?0:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
     onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(isPlaying&&t>=segmentEnd()-.12)endSegment()}catch(e){}},150)},
     onApiChange:()=>suppressYouTubeCaptions(),
