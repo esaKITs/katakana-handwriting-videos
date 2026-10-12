@@ -112,3 +112,15 @@
 .viewer-side .character-nav button:disabled{opacity:.32!important;cursor:default;pointer-events:none}
 /* Reserve a consistent glyph line box for all kana, including ン. */
 .viewer-side .selected-kana{line-height:1.25!important;overflow:visible!important}
+
+/* Bilingual loop help, same centered mobile-safe popup as hiragana. */
+.controls{overflow:visible}
+.loop-help-wrap{position:relative;display:flex;align-items:center;flex:none}
+.loop-help-button{display:grid;place-items:center;width:30px;height:36px;border:0;background:transparent;color:#526d59;font-size:23px;line-height:1;padding:0}
+.loop-help-button:focus-visible{outline:2px solid #526d59;outline-offset:2px;border-radius:6px}
+.loop-help-popup[hidden]{display:none!important}
+.loop-help-popup:not([hidden]){box-sizing:border-box;position:fixed!important;z-index:9999!important;top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:min(360px,calc(100vw - 36px))!important;max-width:calc(100vw - 36px)!important;max-height:calc(100dvh - 48px)!important;overflow-y:auto!important;overflow-wrap:break-word!important;padding:18px!important;border:1px solid #c6d5df;border-radius:12px;background:#fff;color:#314d3a;box-shadow:0 8px 28px rgba(13,55,77,.18);font-size:.86rem;line-height:1.6;text-align:left!important}
+.loop-help-popup strong{display:block;margin-bottom:8px}
+.loop-help-popup p{margin:7px 0}
+.loop-help-popup p[lang=en]{color:#526575}
+@media(max-width:620px){.controls{gap:6px}.loop-help-button{width:25px;font-size:21px}.tips-option{margin-left:0}}
