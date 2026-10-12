@@ -81,3 +81,29 @@
 .viewer-side .character-label{flex:0 0 auto;min-width:max-content;overflow:visible}
 .viewer-side .selected-kana{display:block;flex:none;width:auto;min-width:1em;white-space:nowrap;line-height:1.15;overflow:visible;font-synthesis:none}
 .viewer-side .selected-line{min-width:0}
+
+/* Subtitle development: playback and navigation are distinct controls. */
+.controls{flex-wrap:nowrap;align-items:center}
+.controls #loop-toggle{background:#e7ede7;color:#526d59;border:1px solid #b8c7b7}
+.controls #loop-toggle.loop-active{background:#526d59;color:#fff;border-color:#526d59}
+.controls .icon-control svg{width:24px;height:24px}
+.viewer-side .selected-line{display:grid!important;grid-template-columns:minmax(44px,1fr) minmax(0,auto) minmax(44px,1fr)!important;align-items:center!important;justify-content:center!important;gap:10px!important;width:100%}
+.viewer-side .character-label{grid-column:2;min-width:0;justify-self:center;text-align:center}
+.viewer-side .character-nav{display:flex!important;flex-direction:row!important;justify-content:center;align-items:center;min-width:0;margin:0}
+.viewer-side .character-nav:first-child{grid-column:1}
+.viewer-side .character-nav:last-child{grid-column:3}
+.viewer-side .character-nav button{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;width:52px;height:52px;padding:10px}
+.viewer-side .character-nav button svg{width:23px;height:23px;display:block}
+.viewer-side .selected-kana{min-width:0;line-height:1.15}
+@media(max-width:900px){
+.viewer-side .selected-line{flex:1;min-width:0}
+.viewer-side .character-nav button{min-width:40px;width:44px;height:44px;min-height:44px;padding:8px}
+}
+@media(max-width:620px){
+.controls{gap:8px;padding:12px 10px}
+.controls .icon-control,.controls button:first-child.icon-control{width:42px;min-width:42px;height:42px;min-height:42px}
+.tips-option{margin-left:4px;gap:5px}
+.viewer-side .selected-line{gap:4px!important}
+.viewer-side .character-nav button{min-width:36px;width:38px;height:42px;min-height:42px;padding:7px}
+.viewer-side .character-nav button svg{width:21px;height:21px}
+}
