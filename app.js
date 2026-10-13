@@ -6,14 +6,16 @@ function setLoopHelpOpen(open){loopHelpPopup.hidden=!open;loopHelpButton.setAttr
 loopHelpButton.addEventListener('click',()=>setLoopHelpOpen(loopHelpPopup.hidden));
 document.addEventListener('pointerdown',event=>{if(!event.target.closest('.loop-help-wrap'))setLoopHelpOpen(false)});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!loopHelpPopup.hidden){setLoopHelpOpen(false);loopHelpButton.focus()}});
-const VIDEO='Rn2W95wAbvI',rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
+const OE_SEGMENTS={"ア":[[[53,72]],[50,74]],"イ":[[[76,90]],[75,93]],"ウ":[[[96,113]],[94,127]],"エ":[[[129,139],[140,150]],[128,162]],"オ":[[[164,180]],[163,196]],"カ":[[[198,216]],[197,222]],"キ":[[[224,245]],[223,256]],"ク":[[[272,290]],[257,293]],"ケ":[[[298,315]],[294,332]],"コ":[[[335,348]],[333,359]],"サ":[[[361,378]],[360,390]],"シ":[[[399,411]],[391,425]],"ス":[[[433,447]],[426,457]],"セ":[[[458,479]],[458,483]],"ソ":[[[485,500]],[484,512]],"タ":[[[515,530]],[513,536]],"チ":[[[546,556]],[537,559]],"ツ":[[[561,579]],[560,591]],"テ":[[[593,609]],[592,609]],"ト":[[[610,620],[625,636]],[610,641]],"ナ":[[[642,658]],[642,671]],"ニ":[[[672,685]],[672,692]],"ヌ":[[[693,709]],[693,719]],"ネ":[[[720,740]],[720,754]],"ノ":[[[756,765]],[755,768]],"ハ":[[[770,782]],[769,792]],"ヒ":[[[793,802]],[793,810]],"フ":[[[811,820]],[811,829]],"ヘ":[[[830,840]],[830,847]],"ホ":[[[849,861],[870,877]],[848,884]],"マ":[[[886,894]],[885,909]],"ミ":[[[911,920]],[910,922]],"ム":[[[928,943]],[923,948]],"メ":[[[950,960]],[949,969]],"モ":[[[971,988]],[970,993]],"ヤ":[[[995,1007]],[994,1018]],"ユ":[[[1020,1035]],[1019,1045]],"ヨ":[[[1047,1060]],[1046,1066]],"ラ":[[[1068,1079]],[1067,1083]],"リ":[[[1085,1096]],[1084,1100]],"ル":[[[1102,1116]],[1101,1125]],"レ":[[[1127,1136]],[1126,1142]],"ロ":[[[1144,1157]],[1143,1166]],"ワ":[[[1168,1178]],[1167,1182]],"ヲ":[[[1230,1243]],[1228,1244]],"ン":[[[1246,1259]],[1245,1272]]};
+const VIDEO='N_IMNX4BZhU',rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
 let videos=[],tipMap=new Map(),subtitleMap=new Map(),selected=0,player,ready=false,loop=true,isPlaying=false,monitorId=null,currentTipText='';
+let rangeIndex=0;
 let playbackMode=new URLSearchParams(location.search).get('mode')==='explanation'?'explanation':'writing';
 const $=id=>document.getElementById(id),setStatus=s=>{};
 
 function qrUrl(k){return 'qr/'+k.codePointAt(0).toString(16).padStart(4,'0')+'.svg'}
 function updateQR(k){$('selected-qr').src=qrUrl(k);$('selected-qr').alt=k+'の教材ページへのQRコード'}
-function segmentStart(){
+function segmentStart(){const rr=OE_SEGMENTS[videos[selected]?.kana]?.[playbackMode==='writing'?0:1];if(rr?.length)return Math.max(0,rr[0][0]-(playbackMode==='explanation'?2:0));
   const v=videos[selected];
   const normal=Math.max(0,v.start-2);
   if(playbackMode!=='explanation')return normal;
@@ -23,7 +25,7 @@ function segmentStart(){
   // Keep spoken introductions, but never seek into the previous character's segment.
   return Math.max(0,previousEnd,Math.min(normal,first));
 }
-function segmentEnd(){
+function segmentEnd(){const rr=OE_SEGMENTS[videos[selected]?.kana]?.[playbackMode==='writing'?0:1];if(rr?.length)return rr[rr.length-1][1]+(playbackMode==='explanation'?2:0);
   const v=videos[selected];
   if(playbackMode==='writing')return v.end+2;
   if(Number.isFinite(v.tipsEnd)){
@@ -101,7 +103,7 @@ function updateLoopButton(){
 }
 function stop(){isPlaying=false;updatePlayButton();hideTipCaption();if(ready)try{player.pauseVideo()}catch(e){}}
 function loadCurrentSegment(){
-  if(!ready||!videos.length)return;
+  if(!ready||!videos.length)return;rangeIndex=0;
   player.loadVideoById({videoId:VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()});
   suppressYouTubeCaptions();
 }
@@ -115,7 +117,7 @@ function play(){
  }catch(e){isPlaying=false;updatePlayButton();setStatus('再生できませんでした')}
 }
 function loopBack(){
- if(!loop||!ready||!isPlaying)return;
+ if(!loop||!ready||!isPlaying)return;rangeIndex=0;
  try{
    // Reuse the current YouTube player instead of reloading the video at every loop.
    player.seekTo(segmentStart(),true);
@@ -126,6 +128,8 @@ function loopBack(){
 }
 function endSegment(){
  if(!isPlaying)return;
+ const rr=OE_SEGMENTS[videos[selected]?.kana]?.[playbackMode==='writing'?0:1]||[];
+ if(rangeIndex<rr.length-1){rangeIndex++;player.seekTo(rr[rangeIndex][0],true);player.playVideo();return;}
  if(loop){loopBack();return}
  isPlaying=false;updatePlayButton();hideTipCaption();
  try{player.pauseVideo()}catch(e){}
@@ -162,8 +166,8 @@ function createVideoPlayer(){
   // YouTube replaces this element with an iframe, so restore its mount point.
   const mount=document.getElementById('video-shell');
   if(!mount){const shell=document.createElement('div');shell.id='video-shell';document.querySelector('.video-shell')?.append(shell);}
-  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:33,end:39,playsinline:playbackMode==='writing'?0:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
-    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(isPlaying&&t>=segmentEnd()-.12)endSegment()}catch(e){}},150)},
+  player=new YT.Player('video-shell',{videoId:VIDEO,playerVars:{start:50,end:74,playsinline:playbackMode==='writing'?0:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
+    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(isPlaying&&t>=((OE_SEGMENTS[videos[selected]?.kana]?.[playbackMode==='writing'?0:1]?.[rangeIndex]?.[1]??segmentEnd())+(playbackMode==='explanation'?2:0))-.12)endSegment()}catch(e){}},150)},
     onApiChange:()=>suppressYouTubeCaptions(),
     onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING){suppressYouTubeCaptions();setTimeout(suppressYouTubeCaptions,350);setTimeout(suppressYouTubeCaptions,1200);}if(e.data===YT.PlayerState.ENDED)endSegment()},onError:e=>{isPlaying=false;updatePlayButton();hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
   }});
@@ -177,5 +181,5 @@ $('previous-kana').onclick=()=>{if(selected>0)choose(selected-1,true,true)};
 $('next-kana').onclick=()=>{if(selected<videos.length-1)choose(selected+1,true,true)};
 $('print-button').onclick=async()=>{const button=$('print-button');button.disabled=true;try{const images=[...document.querySelectorAll('.card-qr')];await Promise.all(images.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth===0){reject(new Error('QR missing: '+img.src));return}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',()=>reject(new Error('QR missing: '+img.src)),{once:true})})));window.print()}catch(e){alert('QRコードをすべて読み込めませんでした。通信状況を確認して、もう一度お試しください。')}finally{button.disabled=false}};
 window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);playbackMode=q.get('mode')==='explanation'?'explanation':'writing';syncTipsToggle();applyAudioMode();hideTipCaption();const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
-Promise.all([fetch('videos.json').then(r=>r.json()),fetch('tips.json').then(r=>r.json()),fetch('subtitles.json').then(r=>r.json())]).then(([v,t,sub])=>{videos=v;tipMap=new Map(t.map(x=>[x.kana,x.tips||[]]));subtitleMap=new Map(Object.entries(sub));render()}).catch(()=>setStatus('一覧データを読み込めません'));
+Promise.all([fetch('videos.json').then(r=>r.json())]).then(([v])=>{videos=v;tipMap=new Map();subtitleMap=new Map();render()}).catch(()=>setStatus('一覧データを読み込めません'));
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.append(script);
