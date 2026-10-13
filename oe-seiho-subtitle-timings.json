@@ -2,467 +2,755 @@
   "videoId": "N_IMNX4BZhU",
   "source": "GeminiによるYouTube字幕解析の報告（ユーザー提供）",
   "status": "subtitle_based_unverified",
-  "notes": "解説開始・終了時刻は字幕に基づく暫定値。映像の運筆区間は未測定。",
+  "notes": "解説と運筆はいずれも字幕に基づく暫定値。運筆46文字の推定区間を収録。映像による検証は未実施。",
   "characters": {
     "ア": {
       "explanation": [
         50,
         74
       ],
-      "writing": [],
+      "writing": [
+        [
+          53,
+          72
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "イ": {
       "explanation": [
         75,
         93
       ],
-      "writing": [],
+      "writing": [
+        [
+          76,
+          90
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ウ": {
       "explanation": [
         94,
         127
       ],
-      "writing": [],
+      "writing": [
+        [
+          96,
+          113
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "エ": {
       "explanation": [
         128,
         162
       ],
-      "writing": [],
+      "writing": [
+        [
+          129,
+          139
+        ],
+        [
+          140,
+          150
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "要確認"
     },
     "オ": {
       "explanation": [
         163,
         196
       ],
-      "writing": [],
+      "writing": [
+        [
+          164,
+          180
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "カ": {
       "explanation": [
         197,
         222
       ],
-      "writing": [],
+      "writing": [
+        [
+          198,
+          216
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "キ": {
       "explanation": [
         223,
         256
       ],
-      "writing": [],
+      "writing": [
+        [
+          224,
+          245
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ク": {
       "explanation": [
         257,
         293
       ],
-      "writing": [],
+      "writing": [
+        [
+          272,
+          290
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "258〜271秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ケ": {
       "explanation": [
         294,
         332
       ],
-      "writing": [],
+      "writing": [
+        [
+          298,
+          315
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "コ": {
       "explanation": [
         333,
         359
       ],
-      "writing": [],
+      "writing": [
+        [
+          335,
+          348
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "サ": {
       "explanation": [
         360,
         390
       ],
-      "writing": [],
+      "writing": [
+        [
+          361,
+          378
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "シ": {
       "explanation": [
         391,
         425
       ],
-      "writing": [],
+      "writing": [
+        [
+          399,
+          411
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "411〜425秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ス": {
       "explanation": [
         426,
         457
       ],
-      "writing": [],
+      "writing": [
+        [
+          433,
+          447
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "セ": {
       "explanation": [
         458,
         483
       ],
-      "writing": [],
+      "writing": [
+        [
+          458,
+          479
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ソ": {
       "explanation": [
         484,
         512
       ],
-      "writing": [],
+      "writing": [
+        [
+          485,
+          500
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "500〜512秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "タ": {
       "explanation": [
         513,
         536
       ],
-      "writing": [],
+      "writing": [
+        [
+          515,
+          530
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "チ": {
       "explanation": [
         537,
         559
       ],
-      "writing": [],
+      "writing": [
+        [
+          546,
+          556
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "537〜545秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ツ": {
       "explanation": [
         560,
         591
       ],
-      "writing": [],
+      "writing": [
+        [
+          561,
+          579
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "579〜591秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "テ": {
       "explanation": [
         592,
         609
       ],
-      "writing": [],
+      "writing": [
+        [
+          593,
+          609
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ト": {
       "explanation": [
         610,
         641
       ],
-      "writing": [],
+      "writing": [
+        [
+          610,
+          620
+        ],
+        [
+          625,
+          636
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "1画目と2画目の間に説明（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "要確認"
     },
     "ナ": {
       "explanation": [
         642,
         671
       ],
-      "writing": [],
+      "writing": [
+        [
+          642,
+          658
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ニ": {
       "explanation": [
         672,
         692
       ],
-      "writing": [],
+      "writing": [
+        [
+          672,
+          685
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヌ": {
       "explanation": [
         693,
         719
       ],
-      "writing": [],
+      "writing": [
+        [
+          693,
+          709
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ネ": {
       "explanation": [
         720,
         754
       ],
-      "writing": [],
+      "writing": [
+        [
+          720,
+          740
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ノ": {
       "explanation": [
         755,
         768
       ],
-      "writing": [],
+      "writing": [
+        [
+          756,
+          765
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ハ": {
       "explanation": [
         769,
         792
       ],
-      "writing": [],
+      "writing": [
+        [
+          770,
+          782
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヒ": {
       "explanation": [
         793,
         810
       ],
-      "writing": [],
+      "writing": [
+        [
+          793,
+          802
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "フ": {
       "explanation": [
         811,
         829
       ],
-      "writing": [],
+      "writing": [
+        [
+          811,
+          820
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヘ": {
       "explanation": [
         830,
         847
       ],
-      "writing": [],
+      "writing": [
+        [
+          830,
+          840
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ホ": {
       "explanation": [
         848,
         884
       ],
-      "writing": [],
+      "writing": [
+        [
+          849,
+          861
+        ],
+        [
+          870,
+          877
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "1・2画目と3・4画目の間に別マスでの悪い例・説明の可能性（862〜869秒付近、未実測）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "マ": {
       "explanation": [
         885,
         909
       ],
-      "writing": [],
+      "writing": [
+        [
+          886,
+          894
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ミ": {
       "explanation": [
         910,
         922
       ],
-      "writing": [],
+      "writing": [
+        [
+          911,
+          920
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ム": {
       "explanation": [
         923,
         948
       ],
-      "writing": [],
+      "writing": [
+        [
+          928,
+          943
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "メ": {
       "explanation": [
         949,
         969
       ],
-      "writing": [],
+      "writing": [
+        [
+          950,
+          960
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "モ": {
       "explanation": [
         970,
         993
       ],
-      "writing": [],
+      "writing": [
+        [
+          971,
+          988
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヤ": {
       "explanation": [
         994,
         1018
       ],
-      "writing": [],
+      "writing": [
+        [
+          995,
+          1007
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ユ": {
       "explanation": [
         1019,
         1045
       ],
-      "writing": [],
+      "writing": [
+        [
+          1020,
+          1035
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヨ": {
       "explanation": [
         1046,
         1066
       ],
-      "writing": [],
+      "writing": [
+        [
+          1047,
+          1060
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ラ": {
       "explanation": [
         1067,
         1083
       ],
-      "writing": [],
+      "writing": [
+        [
+          1068,
+          1079
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "リ": {
       "explanation": [
         1084,
         1100
       ],
-      "writing": [],
+      "writing": [
+        [
+          1085,
+          1096
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ル": {
       "explanation": [
         1101,
         1125
       ],
-      "writing": [],
+      "writing": [
+        [
+          1102,
+          1116
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "レ": {
       "explanation": [
         1126,
         1142
       ],
-      "writing": [],
+      "writing": [
+        [
+          1127,
+          1136
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ロ": {
       "explanation": [
         1143,
         1166
       ],
-      "writing": [],
+      "writing": [
+        [
+          1144,
+          1157
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ワ": {
       "explanation": [
         1167,
         1182
       ],
-      "writing": [],
+      "writing": [
+        [
+          1168,
+          1178
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "1183〜1227秒はヰ・ヱの解説（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ヲ": {
       "explanation": [
         1228,
         1244
       ],
-      "writing": [],
+      "writing": [
+        [
+          1230,
+          1243
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": ""
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     },
     "ン": {
       "explanation": [
         1245,
         1272
       ],
-      "writing": [],
+      "writing": [
+        [
+          1246,
+          1259
+        ]
+      ],
       "writingVerified": false,
       "explanationVerified": false,
-      "notes": "1260〜1272秒付近に悪い例の可能性（字幕由来）"
+      "notes": "Geminiの字幕発話時刻に基づく推定。映像未検証。",
+      "writingStatus": "字幕推定"
     }
   }
 }
