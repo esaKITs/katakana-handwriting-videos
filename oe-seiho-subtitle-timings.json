@@ -1,0 +1,468 @@
+{
+  "videoId": "N_IMNX4BZhU",
+  "source": "GeminiによるYouTube字幕解析の報告（ユーザー提供）",
+  "status": "subtitle_based_unverified",
+  "notes": "解説開始・終了時刻は字幕に基づく暫定値。映像の運筆区間は未測定。",
+  "characters": {
+    "ア": {
+      "explanation": [
+        50,
+        74
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "イ": {
+      "explanation": [
+        75,
+        93
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ウ": {
+      "explanation": [
+        94,
+        127
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "エ": {
+      "explanation": [
+        128,
+        162
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "オ": {
+      "explanation": [
+        163,
+        196
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "カ": {
+      "explanation": [
+        197,
+        222
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "キ": {
+      "explanation": [
+        223,
+        256
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ク": {
+      "explanation": [
+        257,
+        293
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "258〜271秒付近に悪い例の可能性（字幕由来）"
+    },
+    "ケ": {
+      "explanation": [
+        294,
+        332
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "コ": {
+      "explanation": [
+        333,
+        359
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "サ": {
+      "explanation": [
+        360,
+        390
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "シ": {
+      "explanation": [
+        391,
+        425
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "411〜425秒付近に悪い例の可能性（字幕由来）"
+    },
+    "ス": {
+      "explanation": [
+        426,
+        457
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "セ": {
+      "explanation": [
+        458,
+        483
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ソ": {
+      "explanation": [
+        484,
+        512
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "500〜512秒付近に悪い例の可能性（字幕由来）"
+    },
+    "タ": {
+      "explanation": [
+        513,
+        536
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "チ": {
+      "explanation": [
+        537,
+        559
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "537〜545秒付近に悪い例の可能性（字幕由来）"
+    },
+    "ツ": {
+      "explanation": [
+        560,
+        591
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "579〜591秒付近に悪い例の可能性（字幕由来）"
+    },
+    "テ": {
+      "explanation": [
+        592,
+        609
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ト": {
+      "explanation": [
+        610,
+        641
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "1画目と2画目の間に説明（字幕由来）"
+    },
+    "ナ": {
+      "explanation": [
+        642,
+        671
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ニ": {
+      "explanation": [
+        672,
+        692
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ヌ": {
+      "explanation": [
+        693,
+        719
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ネ": {
+      "explanation": [
+        720,
+        754
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ノ": {
+      "explanation": [
+        755,
+        768
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ハ": {
+      "explanation": [
+        769,
+        792
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ヒ": {
+      "explanation": [
+        793,
+        810
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "フ": {
+      "explanation": [
+        811,
+        829
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ヘ": {
+      "explanation": [
+        830,
+        847
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ホ": {
+      "explanation": [
+        848,
+        884
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "1・2画目と3・4画目の間に別マスでの悪い例・説明の可能性（862〜869秒付近、未実測）"
+    },
+    "マ": {
+      "explanation": [
+        885,
+        909
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ミ": {
+      "explanation": [
+        910,
+        922
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ム": {
+      "explanation": [
+        923,
+        948
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "メ": {
+      "explanation": [
+        949,
+        969
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "モ": {
+      "explanation": [
+        970,
+        993
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ヤ": {
+      "explanation": [
+        994,
+        1018
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ユ": {
+      "explanation": [
+        1019,
+        1045
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ヨ": {
+      "explanation": [
+        1046,
+        1066
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ラ": {
+      "explanation": [
+        1067,
+        1083
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "リ": {
+      "explanation": [
+        1084,
+        1100
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ル": {
+      "explanation": [
+        1101,
+        1125
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "レ": {
+      "explanation": [
+        1126,
+        1142
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ロ": {
+      "explanation": [
+        1143,
+        1166
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ワ": {
+      "explanation": [
+        1167,
+        1182
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "1183〜1227秒はヰ・ヱの解説（字幕由来）"
+    },
+    "ヲ": {
+      "explanation": [
+        1228,
+        1244
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": ""
+    },
+    "ン": {
+      "explanation": [
+        1245,
+        1272
+      ],
+      "writing": [],
+      "writingVerified": false,
+      "explanationVerified": false,
+      "notes": "1260〜1272秒付近に悪い例の可能性（字幕由来）"
+    }
+  }
+}
