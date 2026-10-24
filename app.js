@@ -12,8 +12,8 @@ const $=id=>document.getElementById(id),setStatus=s=>{};
 
 function qrUrl(k){return 'qr/'+k.codePointAt(0).toString(16).padStart(4,'0')+'.svg'}
 function updateQR(k){$('selected-qr').src=qrUrl(k);$('selected-qr').alt=k+'の教材ページへのQRコード'}
-function segmentStart(){return SEIHO_SEGMENTS[videos[selected].kana][0]}
-function segmentEnd(){return SEIHO_SEGMENTS[videos[selected].kana][1]}
+function segmentStart(){return SEIHO_SEGMENTS[videos[selected]?.kana]?.[0] ?? 3}
+function segmentEnd(){return SEIHO_SEGMENTS[videos[selected]?.kana]?.[1] ?? 9}
 function suppressYouTubeCaptions(){
  if(!ready)return;
  try{player.setOption('captions','track',{})}catch(e){}
