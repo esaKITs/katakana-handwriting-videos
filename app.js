@@ -6,92 +6,18 @@ function setLoopHelpOpen(open){loopHelpPopup.hidden=!open;loopHelpButton.setAttr
 loopHelpButton.addEventListener('click',()=>setLoopHelpOpen(loopHelpPopup.hidden));
 document.addEventListener('pointerdown',event=>{if(!event.target.closest('.loop-help-wrap'))setLoopHelpOpen(false)});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!loopHelpPopup.hidden){setLoopHelpOpen(false);loopHelpButton.focus()}});
-const VIDEO='Rn2W95wAbvI',SEIHO_VIDEO='zv6uxNdROOc',SEIHO_SEGMENTS={"ア":[3,9],"ウ":[16,24],"エ":[25,32],"オ":[33,40],"カ":[41,47],"キ":[48,54],"ケ":[60,66],"コ":[67,73],"サ":[74,81],"シ":[82,87],"セ":[94,99],"タ":[106,111],"チ":[112,119],"ツ":[120,125],"テ":[126,131],"ナ":[138,144],"ニ":[144,149],"ネ":[157,164],"ハ":[170,176],"ヒ":[177,182],"フ":[183,187],"ヘ":[188,193],"マ":[204,208],"ム":[216,222],"メ":[223,229],"モ":[230,236],"ヤ":[238,243],"ヨ":[249,255],"ル":[266,271],"ロ":[277,283],"ワ":[284,290],"ヲ":[291,296],"ン":[297,303],"イ":[9,16],"ク":[54,60],"ス":[87,94],"ソ":[99,106],"ト":[131,138],"ヌ":[149,157],"ノ":[164,170],"ホ":[193,204],"ミ":[208,216],"ユ":[243,249],"ラ":[255,260.5],"リ":[260.5,266],"レ":[271,277]},SEIHO_ESTIMATED=new Set(["イ","ク","ス","ソ","ト","ヌ","ノ","ホ","ミ","ユ","ラ","リ","レ"]),rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
-let videos=[],tipMap=new Map(),subtitleMap=new Map(),selected=0,player,ready=false,loop=true,isPlaying=false,monitorId=null,currentTipText='';
-let playbackMode=new URLSearchParams(location.search).get('mode')==='explanation'?'explanation':'writing';
+const SEIHO_VIDEO='zv6uxNdROOc',SEIHO_SEGMENTS={"ア":[3,9],"ウ":[16,24],"エ":[25,32],"オ":[33,40],"カ":[41,47],"キ":[48,54],"ケ":[60,66],"コ":[67,73],"サ":[74,81],"シ":[82,87],"セ":[94,99],"タ":[106,111],"チ":[112,119],"ツ":[120,125],"テ":[126,131],"ナ":[138,144],"ニ":[144,149],"ネ":[157,164],"ハ":[170,176],"ヒ":[177,182],"フ":[183,187],"ヘ":[188,193],"マ":[204,208],"ム":[216,222],"メ":[223,229],"モ":[230,236],"ヤ":[238,243],"ヨ":[249,255],"ル":[266,271],"ロ":[277,283],"ワ":[284,290],"ヲ":[291,296],"ン":[297,303],"イ":[9,16],"ク":[54,60],"ス":[87,94],"ソ":[99,106],"ト":[131,138],"ヌ":[149,157],"ノ":[164,170],"ホ":[193,204],"ミ":[208,216],"ユ":[243,249],"ラ":[255,260.5],"リ":[260.5,266],"レ":[271,277]},rows=[['ア','A',5],['カ','Ka',5],['サ','Sa',5],['タ','Ta',5],['ナ','Na',5],['ハ','Ha',5],['マ','Ma',5],['ヤ','Ya',3],['ラ','Ra',5],['ワ','Wa',2],[null,null,1]];
+let videos=[],selected=0,player,ready=false,loop=true,isPlaying=false,monitorId=null;
 const $=id=>document.getElementById(id),setStatus=s=>{};
 
 function qrUrl(k){return 'qr/'+k.codePointAt(0).toString(16).padStart(4,'0')+'.svg'}
 function updateQR(k){$('selected-qr').src=qrUrl(k);$('selected-qr').alt=k+'の教材ページへのQRコード'}
-function isSeiho(){return playbackMode==='writing'&&!!SEIHO_SEGMENTS[videos[selected]?.kana]}
-function activeVideo(){return isSeiho()?SEIHO_VIDEO:VIDEO}
-function segmentStart(){
-  if(isSeiho())return SEIHO_SEGMENTS[videos[selected].kana][0];
-  const v=videos[selected];
-  const normal=Math.max(0,v.start-2);
-  if(playbackMode!=='explanation')return normal;
-  const first=subtitleMap.get(v.kana)?.[0]?.start;
-  if(!Number.isFinite(first))return normal;
-  const previousEnd=selected>0?videos[selected-1].tipsEnd:0;
-  // Keep spoken introductions, but never seek into the previous character's segment.
-  return Math.max(0,previousEnd,Math.min(normal,first));
-}
-function segmentEnd(){
-  if(isSeiho())return SEIHO_SEGMENTS[videos[selected].kana][1];
-  const v=videos[selected];
-  if(playbackMode==='writing')return v.end+2;
-  if(Number.isFinite(v.tipsEnd)){
-    const cues=subtitleMap.get(v.kana)||[];
-    const lastEnd=cues.length?cues[cues.length-1].end:0;
-    const nextStart=selected<videos.length-1?videos[selected+1].start:Infinity;
-    // Subtitle-based provisional tail allowance; cap before the next character.
-    return Math.max(v.tipsEnd,Math.min(lastEnd+0.5,nextStart-1));
-  }
-  if(selected<videos.length-1)return Math.max(v.end+2,videos[selected+1].start-2);
-  if(ready){const d=player.getDuration();if(d&&d>v.end)return d-.25}
-  return v.end+30;
-}
-function syncTipsToggle(){
-  const t=$('tips-toggle');
-  if(!t)return;
-  t.checked=playbackMode==='explanation';
-  document.body.classList.toggle('tips-enabled',playbackMode==='explanation');
-}
+function segmentStart(){return SEIHO_SEGMENTS[videos[selected].kana][0]}
+function segmentEnd(){return SEIHO_SEGMENTS[videos[selected].kana][1]}
 function suppressYouTubeCaptions(){
-  if(!ready)return;
-  try{player.setOption('captions','track',{});}catch(e){}
-  try{player.setOption('captions','reload',false);}catch(e){}
-  try{player.unloadModule('captions');}catch(e){}
-}
-function applyAudioMode(){
-  if(!ready)return;
-  try{if(playbackMode==='explanation')player.unMute();else player.mute()}catch(e){}
-}
-function hideTipCaption(){
-  const box=$('tip-caption');
-  if(!box)return;
-  currentTipText='';box.textContent='';box.hidden=true;
-}
-function updateTipCaption(time){
-  const box=$('tip-caption');
-  if(!box)return;
-  if(isSeiho()||playbackMode!=='explanation'||!videos.length){hideTipCaption();return}
-  const list=subtitleMap.get(videos[selected].kana)||[];
-  // ソ has no spoken red-pen explanation; clear the writing subtitle at 524s.
-  const silentTips=videos[selected].kana==='ソ'&&time>=524;
-  const active=time>=segmentStart()&&time<segmentEnd()&&!silentTips;
-  let entry=null;
-  if(active){for(const item of list){if(time>=item.start)entry=item;else break}}
-  const key=entry?entry.start+'|'+entry.en+'|'+(entry.strokeLabel||''):'';
-  if(key===currentTipText)return;
-  currentTipText=key;
-  box.replaceChildren();
-  if(!entry){box.hidden=true;return}
-  if(entry.strokeLabel){
-    const strong=document.createElement('strong');
-    strong.textContent=entry.strokeLabel+': ';
-    box.append(strong);
-  }
-  box.append(document.createTextNode(entry.en));
-  box.hidden=false;
-}
-function setPlaybackMode(mode){
-  if(mode!=='writing'&&mode!=='explanation')return;
-  stop();playbackMode=mode;syncTipsToggle();hideTipCaption();
-  const u=new URL(location.href);
-  if(mode==='explanation')u.searchParams.set('mode','explanation');else u.searchParams.delete('mode');
-  history.replaceState(null,'',u);
-  if(player&&window.YT){createVideoPlayer();}
+ if(!ready)return;
+ try{player.setOption('captions','track',{})}catch(e){}
+ try{player.unloadModule('captions')}catch(e){}
 }
 function updatePlayButton(){
  const b=$('play');if(!b)return;
@@ -103,18 +29,18 @@ function updateLoopButton(){
  b.classList.toggle('loop-active',loop);b.setAttribute('aria-pressed',String(loop));
  b.setAttribute('aria-label',loop?'ループ再生オン':'ループ再生オフ');b.title=loop?'ループ再生オン':'ループ再生オフ';
 }
-function stop(){isPlaying=false;updatePlayButton();hideTipCaption();if(ready)try{player.pauseVideo()}catch(e){}}
+function stop(){isPlaying=false;updatePlayButton();if(ready)try{player.pauseVideo()}catch(e){}}
 function loadCurrentSegment(){
   if(!ready||!videos.length)return;
-  player.loadVideoById({videoId:activeVideo(),startSeconds:segmentStart(),endSeconds:segmentEnd()});
+  player.loadVideoById({videoId:SEIHO_VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()});
   suppressYouTubeCaptions();
 }
 function play(){
  if(!ready)return;
  if(isPlaying){try{player.pauseVideo()}catch(e){}isPlaying=false;updatePlayButton();return}
- if(playbackMode==='writing'){try{const iframe=player.getIframe(),request=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(request){const result=request.call(iframe);if(result&&typeof result.catch==='function')result.catch(()=>{});}else if(iframe.webkitEnterFullscreen){iframe.webkitEnterFullscreen()}}catch(e){}}
+ {try{const iframe=player.getIframe(),request=iframe.requestFullscreen||iframe.webkitRequestFullscreen;if(request){const result=request.call(iframe);if(result&&typeof result.catch==='function')result.catch(()=>{});}else if(iframe.webkitEnterFullscreen){iframe.webkitEnterFullscreen()}}catch(e){}}
  try{
-   loadCurrentSegment();applyAudioMode();hideTipCaption();
+   loadCurrentSegment();
    isPlaying=true;updatePlayButton();
  }catch(e){isPlaying=false;updatePlayButton();setStatus('再生できませんでした')}
 }
@@ -124,14 +50,14 @@ function loopBack(){
    // Reuse the current YouTube player instead of reloading the video at every loop.
    player.seekTo(segmentStart(),true);
    player.playVideo();
-   applyAudioMode();hideTipCaption();
+   
  }
  catch(e){isPlaying=false;updatePlayButton();setStatus('繰り返し再生に失敗しました')}
 }
 function endSegment(){
  if(!isPlaying)return;
  if(loop){loopBack();return}
- isPlaying=false;updatePlayButton();hideTipCaption();
+ isPlaying=false;updatePlayButton();
  try{player.pauseVideo()}catch(e){}
 }
 function choose(i,changeUrl=true,userAction=false){
@@ -139,7 +65,7 @@ function choose(i,changeUrl=true,userAction=false){
   $('selected-kana').textContent=v.kana;$('selected-romaji').textContent=v.romaji;updateQR(v.kana);
   $('previous-kana').disabled=i===0;$('next-kana').disabled=i===videos.length-1;
   document.querySelectorAll('.card').forEach((c,j)=>{c.classList.toggle('active',i===j);c.querySelector('button').setAttribute('aria-pressed',String(i===j))});
-  if(ready&&!userAction)try{player.cueVideoById({videoId:activeVideo(),startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
+  if(ready&&!userAction)try{player.cueVideoById({videoId:SEIHO_VIDEO,startSeconds:segmentStart(),endSeconds:segmentEnd()})}catch(e){}
   if(changeUrl){const u=new URL(location.href);u.searchParams.set('kana',v.kana);history.replaceState(null,'',u);$('video-shell').scrollIntoView({block:'start'})}
   setStatus('再生ボタンで開始');if(userAction)play();
 }
@@ -158,7 +84,7 @@ function render(){
     }
     offset+=count;section.append(grid);groups.append(section);
   });
-  const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);syncTipsToggle();
+  const k=new URLSearchParams(location.search).get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false);
 }
 function createVideoPlayer(){
   ready=false;isPlaying=false;updatePlayButton();
@@ -166,20 +92,19 @@ function createVideoPlayer(){
   // YouTube replaces this element with an iframe, so restore its mount point.
   const mount=document.getElementById('video-shell');
   if(!mount){const shell=document.createElement('div');shell.id='video-shell';document.querySelector('.video-shell')?.append(shell);}
-  player=new YT.Player('video-shell',{videoId:activeVideo(),playerVars:{start:segmentStart(),end:segmentEnd(),playsinline:playbackMode==='writing'?0:1,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
-    onReady:()=>{ready=true;applyAudioMode();suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();updateTipCaption(t);if(isPlaying&&t>=segmentEnd()-.12)endSegment()}catch(e){}},150)},
+  player=new YT.Player('video-shell',{videoId:SEIHO_VIDEO,playerVars:{start:segmentStart(),end:segmentEnd(),playsinline:0,controls:1,fs:1,rel:0,enablejsapi:1,cc_load_policy:0,iv_load_policy:3,hl:'en'},events:{
+    onReady:()=>{ready=true;try{player.mute()}catch(e){};suppressYouTubeCaptions();setStatus('再生できます');if(videos.length)choose(selected,false);if(!monitorId)monitorId=setInterval(()=>{if(!ready)return;try{const t=player.getCurrentTime();if(isPlaying&&t>=segmentEnd()-.12)endSegment()}catch(e){}},150)},
     onApiChange:()=>suppressYouTubeCaptions(),
-    onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING){suppressYouTubeCaptions();setTimeout(suppressYouTubeCaptions,350);setTimeout(suppressYouTubeCaptions,1200);}if(e.data===YT.PlayerState.ENDED)endSegment()},onError:e=>{isPlaying=false;updatePlayButton();hideTipCaption();setStatus('YouTube再生エラー: '+e.data)}
+    onStateChange:e=>{if(e.data===YT.PlayerState.PLAYING){suppressYouTubeCaptions();setTimeout(suppressYouTubeCaptions,350);setTimeout(suppressYouTubeCaptions,1200);}if(e.data===YT.PlayerState.ENDED)endSegment()},onError:e=>{isPlaying=false;updatePlayButton();setStatus('YouTube再生エラー: '+e.data)}
   }});
 }
 window.onYouTubeIframeAPIReady=createVideoPlayer;
 $('play').onclick=play;
 $('loop-toggle').onclick=()=>{loop=!loop;updateLoopButton()};
 updateLoopButton();updatePlayButton();
-$('tips-toggle').onchange=e=>setPlaybackMode(e.target.checked?'explanation':'writing');
 $('previous-kana').onclick=()=>{if(selected>0)choose(selected-1,true,true)};
 $('next-kana').onclick=()=>{if(selected<videos.length-1)choose(selected+1,true,true)};
 $('print-button').onclick=async()=>{const button=$('print-button');button.disabled=true;try{const images=[...document.querySelectorAll('.card-qr')];await Promise.all(images.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth===0){reject(new Error('QR missing: '+img.src));return}img.addEventListener('load',resolve,{once:true});img.addEventListener('error',()=>reject(new Error('QR missing: '+img.src)),{once:true})})));window.print()}catch(e){alert('QRコードをすべて読み込めませんでした。通信状況を確認して、もう一度お試しください。')}finally{button.disabled=false}};
-window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);playbackMode=q.get('mode')==='explanation'?'explanation':'writing';syncTipsToggle();applyAudioMode();hideTipCaption();const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
-Promise.all([fetch('videos.json').then(r=>r.json()),fetch('tips.json').then(r=>r.json()),fetch('subtitles.json').then(r=>r.json())]).then(([v,t,sub])=>{videos=v;tipMap=new Map(t.map(x=>[x.kana,x.tips||[]]));subtitleMap=new Map(Object.entries(sub));render()}).catch(()=>setStatus('一覧データを読み込めません'));
+window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);const k=q.get('kana');choose(Math.max(0,videos.findIndex(v=>v.kana===k)),false)});
+fetch('videos.json').then(r=>r.json()).then(v=>{videos=v;render()}).catch(()=>setStatus('一覧データを読み込めません'));
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.append(script);
