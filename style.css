@@ -102,7 +102,7 @@
 @media(max-width:620px){
 .controls{gap:8px;padding:12px 10px}
 .controls .icon-control,.controls button:first-child.icon-control{width:42px;min-width:42px;height:42px;min-height:42px}
-.tips-option{margin-left:4px;gap:5px}
+
 .viewer-side .selected-line{gap:4px!important}
 .viewer-side .character-nav button{min-width:36px;width:38px;height:42px;min-height:42px;padding:7px}
 .viewer-side .character-nav button svg{width:21px;height:21px}
@@ -123,7 +123,7 @@
 .loop-help-popup strong{display:block;margin-bottom:8px}
 .loop-help-popup p{margin:7px 0}
 .loop-help-popup p[lang=en]{color:#526575}
-@media(max-width:620px){.controls{gap:6px}.loop-help-button{width:25px;font-size:21px}.tips-option{margin-left:0}}
+@media(max-width:620px){.controls{gap:6px}.loop-help-button{width:25px;font-size:21px}}
 
 /* Keep the header kana emblem perfectly square and optically centered. */
 @media screen {
